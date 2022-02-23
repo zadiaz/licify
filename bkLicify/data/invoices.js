@@ -6,14 +6,14 @@ const invoices = [
             {
                 qty: 1,
                 desc: 'Perro Caliente',
-                price: 120,
-                tax: 12,
+                price: 0,
+                tax: 0,
             },
             {
                 qty: 3,
                 desc: 'Hamburguesa Caliente',
-                price: 150,
-                tax: 15,
+                price: 0,
+                tax: 0,
             },
 
         ]
