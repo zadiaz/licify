@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { AuthGuard } from './auth.guard'
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { InvoiceComponent } from './components/invoice/invoice.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     AppComponent,
     SignupComponent,
     SigninComponent,
-    InvoicesComponent
+    InvoicesComponent,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,

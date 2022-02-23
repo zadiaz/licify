@@ -1,1 +1,75 @@
-<p>invoices works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col text-end">
+      <h1>Facturas</h1>
+      <button class="btn btn-success" (click)="createInvoice()">+</button>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <select name="field" [(ngModel)]="fie" id="field" class="form-control form-control-sm">
+        <option value="number">Numero</option>
+        <option value="total">Total</option>
+        <option value="taxes">IVA</option>
+        <option value="status">Estado</option>
+        <option value="desc">Descripción</option>
+      </select>
+    </div>
+    <div class="col-sm-3" *ngIf="fie != 'status' && fie != 'desc' ">
+      <select name=" ope" [(ngModel)]="ope" id="ope" class="form-control form-control-sm">
+        <option value="gt">Mayor que</option>
+        <option value="lt">Menor que</option>
+        <option value="eq">Igual a</option>
+      </select>
+    </div>
+    <div class="col-sm-3" *ngIf="fie != 'status' && fie != 'desc'">
+      <input type="number" step="1" min="0" [(ngModel)]="val" name="val" class="form-control form-control-sm"
+        placeholder="Valor">
+    </div>
+    <div class="col-sm-3" *ngIf="fie == 'status'">
+      <select name="est" [(ngModel)]="est" id="est" class="form-control form-control-sm">
+        <option value="100">Creada</option>
+        <option value="200">Pagada</option>
+      </select>
+
+    </div>
+    <div class="col-sm-3" *ngIf="fie == 'desc'">
+      <input type="text" class="form-control form-control-sm" placeholder="Descripcion del item">
+
+    </div>
+    <div class="col-sm-3 text-center">
+      <button class="btn btn-sm mx-2 btn-warning" (click)="filter()">Filtrar</button>
+      <button class="btn btn-sm mx-2 btn-info" (click)="load()">Recargar</button>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-sm">
+      <table class="table">
+        <thead>
+          <tr>
+
+            <th scope="col">#</th>
+            <th scope="col">IVA</th>
+            <th scope="col">Total</th>
+            <th style="width: 30px;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of invoices">
+            <th scope="row">{{invoice.number}}</th>
+            <td>{{invoice.taxes}}</td>
+            <td>{{invoice.total}}</td>
+            <td><a routerLink="/invoice/{{invoice._id}}" class="btn btn-secondary">Ver</a> </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

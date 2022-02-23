@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const invoiceSchema = mongoose.Schema({
     number: {
         type: Number,
-        required: true,
+
     },
     total: {
         type: Number,
@@ -29,15 +29,18 @@ const invoiceSchema = mongoose.Schema({
 }, {
     timestamps: true
 })
-invoiceSchema.pre('save', function (next) {
-    let last = this.find({}).sort({ _id: -1 }).limit(1)
-    if (this.isNew()) {
+invoiceSchema.pre('save', async function (next) {
+    let last = await Invoice.findOne({}).sort({ _id: -1 }).limit(1)
+
+    if (!this.number) {
         if (last?.number) {
+
             this.number = last.number + 1
         } else {
             this.number = 1
         }
     }
+    console.log(this.number)
     next()
 });
 invoiceSchema.pre('save', function (next) {

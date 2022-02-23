@@ -6,6 +6,7 @@ import { SignupComponent } from './components/signup/signup.component'
 import { SigninComponent } from './components/signin/signin.component'
 
 import { AuthGuard } from './auth.guard'
+import { InvoiceComponent } from './components/invoice/invoice.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent
+  },
+  {
+    path: 'invoice/:id',
+    component: InvoiceComponent
   }
 ];
 

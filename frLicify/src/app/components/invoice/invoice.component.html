@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col text-end">
+      <h1>Factura <span class="p-2 bg-light border-rounded"> F-{{invoice?.number}}</span> </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+
+            <th scope="col">#</th>
+            <th scope="col">Descripcion</th>
+
+            <th>IVA</th>
+            <th scope="col">Total</th>
+            <th *ngIf="invoice?.status == 100" style="width: 30px;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of invoice?.items">
+            <th scope="row">{{item.qty}}</th>
+            <td>{{item.desc}}</td>
+            <td>{{item.tax}}</td>
+            <td>{{item.price}}</td>
+            <td *ngIf="invoice?.status == 100">
+              <button class="btn btn-sm btn-danger" (click)="deleteItem(item)">-</button>
+            </td>
+
+          </tr>
+          <tr *ngIf="invoice?.status == 100">
+            <th>
+              <input type="number" min="0" step="1" name="qty" [(ngModel)]="item.qty" placeholder="Cant" required
+                autofocus class="form-control">
+
+            </th>
+            <td>
+              <input type="text" name="desc" [(ngModel)]="item.desc" placeholder="Descripcion del producto" required
+                class="form-control">
+
+            </td>
+            <td>
+              <input type="number" min="0" step="0.01" name="tax" [(ngModel)]="item.tax" placeholder="IVA" required
+                class="form-control">
+
+            </td>
+            <td>
+              <input type="number" min="0.01" step="0.01" name="price" [(ngModel)]="item.price" placeholder="Precio"
+                required class="form-control">
+
+            </td>
+            <td>
+              <button class="btn btn-sm btn-success" (click)="addItem()">+</button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center h2">
+      Total IVA: {{this.taxes()}}
+    </div>
+    <div class="col text-center h2">
+      Total: {{this.total()}}
+    </div>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col text-center">
+      <button *ngIf="invoice?.status == 100" (click)="eliminar()" class="btn btn-danger btn-lg p-3">Eliminar</button>
+    </div>
+    <div class="col text-center">
+      <button *ngIf="invoice?.status == 100" (click)="pagar()" class="btn btn-warning btn-lg p-3">Pagadar</button>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col text-info text-center" *ngIf="invoice?.status == 200">
+      <h1>Factura Pagada</h1>
+    </div>
+    <div class="col text-danger text-center" *ngIf="invoice?.status == 300">
+      <h1>Factura Eliminada</h1>
+    </div>
+  </div>
+
+</div>
